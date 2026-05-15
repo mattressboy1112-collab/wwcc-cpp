@@ -21,7 +21,7 @@ struct Account {
 void CreateAccount(vector<Account>& lst, int& counter, string name, double start_cash = 0) {
     Account temp1;
     temp1.accountNumber = counter;
-    counter += 1;
+    counter++;
     temp1.holderName = name;
     temp1.balance = start_cash;
     lst.push_back(temp1);
@@ -65,9 +65,9 @@ int main() {
                 cout << "Starting amount: "; cin >> start_amount;
                 CreateAccount(accounts, counter, temp, start_amount);
             } else if (input == 2) {
-                for (Account i : accounts) {
-                    cout << i.accountNumber << "-" << i.holderName << " - " << i.balance << endl;
-                } 
+                for (Account acc : accounts) {
+                    cout << acc.accountNumber << "-" << acc.holderName << " - " << acc.balance << endl;
+                }
             } else if (input == 3) {
                 int acc_num;
                 double money;
@@ -79,6 +79,8 @@ int main() {
                     Account& acc = accounts[acc_num];
                     AddOrRemoveMoney(acc, money, "deposit");
                     cout << endl << "Added " << money << " to account " << acc.accountNumber << "-" << acc.holderName << endl;
+                } else {
+                    cout << endl << "Invalid user ID - returning to menu" << endl;
                 }
             } else if (input == 4) {
                 int acc_num;
@@ -91,6 +93,8 @@ int main() {
                     Account& acc = accounts[acc_num];
                     AddOrRemoveMoney(acc, -money, "withdrawl");
                     cout << endl << "Withdrawn " << money << " from account " << acc.accountNumber << "-" << acc.holderName << endl;
+                } else {
+                    cout << endl << "Invalid user ID - returning to menu" << endl;
                 }
             } else if (input == 5) {
                 int acc_num1, acc_num2;
@@ -108,7 +112,11 @@ int main() {
                         Account& acc2 = accounts[acc_num2];
                         AddOrRemoveMoney(acc2, money, "transfer");
                         cout << endl << "Transfered " << money << " from account " << acc1.accountNumber << "-" << acc1.holderName << " to account " << acc2.accountNumber << "-" << acc2.holderName << endl;
+                    } else {
+                        cout << endl << "Invalid user ID - returning to menu" << endl;
                     }
+                } else {
+                    cout << endl << "Invalid user ID - returning to menu" << endl;
                 }
             } else if (input == 6) {
                 int acc_num;
@@ -117,10 +125,13 @@ int main() {
                 if (acc_num > -1 and acc_num < int(accounts.size())) {
                     Account& acc = accounts[acc_num];
                     cout << acc.transactionCount << " total transactions (100 max shown)" << endl;
-                    for (int i = 0; (i < acc.transactionCount) and (i < 100); i++) { 
+                    const int MAX_TRANSACTIONS = 100;
+                    for (int i = 0; (i < acc.transactionCount) and (i < MAX_TRANSACTIONS-1); i++) { 
                         Transaction h = acc.history[i];
                         cout << ctime(&h.date) << h.type << " - " << h.amount << endl;
-                    } 
+                    }
+                } else {
+                    cout << endl << "Invalid user ID - returning to menu" << endl;
                 }
             }
         } else {
