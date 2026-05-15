@@ -135,7 +135,7 @@ int main() {
                 }
             }
         } else {
-            cout << "--------------";
+            cout << "--------------" << endl;
             cout << "Goodbye!";
         }
     }
