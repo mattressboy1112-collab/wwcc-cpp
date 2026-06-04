@@ -1,0 +1,12 @@
+name 1
+I 1/2 butter
+I 1/2 tv
+S mix mix mix
+N
+name 2
+I 4 eggs
+I 2 eggs
+I 5 eggs
+S crack eggs
+S mix eggs
+N
